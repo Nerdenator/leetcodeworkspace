@@ -21,6 +21,15 @@ Note the bottom corner is not colored 2, because it is not 4-directionally conne
 import unittest
 
 
+def print_matrix(image):
+    print("---------------")
+    for row in image:
+        print('')
+        for column in row:
+            print(f'|{column}|', end='')
+    print("\n---------------")
+
+
 def flood_fill(image, sr, sc, new_color):
     row, column = len(image), len(image[0])
     color = image[sr][sc]
@@ -31,13 +40,19 @@ def flood_fill(image, sr, sc, new_color):
         if image[r][c] == color:
             image[r][c] = new_color
             if r >= 1:
+                print_matrix(image)
                 dfs(r-1, c)
             if r + 1 < row:
+                print_matrix(image)
                 dfs(r+1, c)
             if c >= 1:
+                print_matrix(image)
                 dfs(r, c - 1)
             if c + 1 < column:
+                print_matrix(image)
                 dfs(r, c + 1)
+    print("Initial state")
+    print_matrix(image)
     dfs(sr, sc)
     return image
 
